@@ -41,14 +41,14 @@ const tools = [
     icon: VideoIcon,
     color: 'text-orange-500',
     bgColor: 'bg-orange-500/10',
-    href: '/conversation',
+    href: '/video',
   },
   {
     label: 'Code Generation',
     icon: Code,
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
-    href: '/conversation',
+    href: '/code',
   },
 ];
 
