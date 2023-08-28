@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json(response.data.choices[0].message);
   } catch (err) {
-    console.log('[CODE_ERROR', err);
+    console.log('[CODE_ERROR]', err);
     return new NextResponse('Internal error', { status: 500 });
   }
 }
