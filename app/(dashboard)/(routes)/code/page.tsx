@@ -21,6 +21,7 @@ import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/common/UserAvatar';
 import { BotAvatar } from '@/components/common/BotAvatar';
 import { useProModal } from '@/hooks/use-pro-modal';
+import toast from 'react-hot-toast';
 
 export default function CodePage() {
   const router = useRouter();
@@ -54,6 +55,8 @@ export default function CodePage() {
     } catch (err: any) {
       if (err?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error('Something went wrong.');
       }
       console.log(err);
     } finally {

@@ -16,6 +16,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { formSchema } from './contants';
 import { useProModal } from '@/hooks/use-pro-modal';
+import toast from 'react-hot-toast';
 
 export default function VideoPage() {
   const router = useRouter();
@@ -42,6 +43,8 @@ export default function VideoPage() {
     } catch (err: any) {
       if (err?.response?.status === 403) {
         proModal.onOpen();
+      } else {
+        toast.error('Something went wrong.');
       }
       console.log(err);
     } finally {
