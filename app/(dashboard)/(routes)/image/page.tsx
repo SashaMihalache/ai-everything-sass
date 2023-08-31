@@ -27,9 +27,11 @@ import {
 } from '@/components/ui/select';
 import { Card, CardFooter } from '@/components/ui/card';
 import Image from 'next/image';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 export default function ImagePage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [images, setImages] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,7 +58,9 @@ export default function ImagePage() {
 
       form.reset();
     } catch (err: any) {
-      // TODO: open pro modal
+      if (err?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(err);
     } finally {
       router.refresh();

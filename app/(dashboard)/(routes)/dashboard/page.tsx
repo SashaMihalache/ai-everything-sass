@@ -1,56 +1,10 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { routes } from '@/constants';
 import { cn } from '@/lib/utils';
-import { UserButton } from '@clerk/nextjs';
-import {
-  ArrowRight,
-  Code,
-  ImageIcon,
-  MessageSquare,
-  Music,
-  VideoIcon,
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-
-const tools = [
-  {
-    label: 'Conversation',
-    icon: MessageSquare,
-    color: 'text-violet-500',
-    bgColor: 'bg-violet-500/10',
-    href: '/conversation',
-  },
-  {
-    label: 'Music Generation',
-    icon: Music,
-    color: 'text-emerald-500',
-    bgColor: 'bg-emerald-500/10',
-    href: '/music',
-  },
-  {
-    label: 'Image Generation',
-    icon: ImageIcon,
-    color: 'text-pink-700',
-    bgColor: 'bg-pink-700/10',
-    href: '/image',
-  },
-  {
-    label: 'Video Generation',
-    icon: VideoIcon,
-    color: 'text-orange-500',
-    bgColor: 'bg-orange-500/10',
-    href: '/video',
-  },
-  {
-    label: 'Code Generation',
-    icon: Code,
-    color: 'text-green-500',
-    bgColor: 'bg-green-500/10',
-    href: '/code',
-  },
-];
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -65,7 +19,7 @@ export default function DashboardPage() {
           Chat with the smartest AI to get your questions answered
         </p>
         <div className="px-4 md:px-20 lg:px-32 space-y-4">
-          {tools.map((tool, index) => (
+          {routes.map((tool, index) => (
             <Card
               onClick={() => router.push(tool.href)}
               key={tool.href}

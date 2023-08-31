@@ -15,9 +15,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Empty } from '@/components/common/Empty';
 import { Loader } from '@/components/common/Loader';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 export default function MusicPage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [music, setMusic] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -38,7 +40,9 @@ export default function MusicPage() {
 
       form.reset();
     } catch (err: any) {
-      // TODO: open pro modal
+      if (err?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(err);
     } finally {
       router.refresh();

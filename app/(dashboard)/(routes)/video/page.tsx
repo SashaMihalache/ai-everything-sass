@@ -15,9 +15,11 @@ import { Input } from '@/components/ui/input';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { formSchema } from './contants';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 export default function VideoPage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [video, setVideo] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -38,7 +40,9 @@ export default function VideoPage() {
 
       form.reset();
     } catch (err: any) {
-      // TODO: open pro modal
+      if (err?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(err);
     } finally {
       router.refresh();

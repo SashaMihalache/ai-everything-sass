@@ -20,9 +20,11 @@ import { Loader } from '@/components/common/Loader';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/common/UserAvatar';
 import { BotAvatar } from '@/components/common/BotAvatar';
+import { useProModal } from '@/hooks/use-pro-modal';
 
 export default function CodePage() {
   const router = useRouter();
+  const proModal = useProModal();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
@@ -50,7 +52,9 @@ export default function CodePage() {
 
       form.reset();
     } catch (err: any) {
-      // TODO: open pro modal
+      if (err?.response?.status === 403) {
+        proModal.onOpen();
+      }
       console.log(err);
     } finally {
       router.refresh();
